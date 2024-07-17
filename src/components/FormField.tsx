@@ -1,6 +1,7 @@
 import React from 'react'
+import {FormFieldProps} from "../constants/interfaces";
 
-const FormField = () => {
+const FormField : React.FC<FormFieldProps> = () => {
     return (
         <div>FormField</div>
     )
