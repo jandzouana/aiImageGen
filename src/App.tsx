@@ -17,7 +17,7 @@ const App = () => {
             <main className="sm:p8 px-4 py-8 w-full bg-[#f9fafe] min-h-[calc(100svh-73px)]">
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
-                    <Route path="./create-post" element={<CreatePost/>}></Route>
+                    <Route path="/create-post" element={<CreatePost/>}></Route>
                 </Routes>
             </main>
 
