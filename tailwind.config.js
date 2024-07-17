@@ -13,6 +13,12 @@ module.exports = {
         card: '0 0 1px 0 rgba(189,192,207,0.06),0 10px 16px -1px rgba(189,192,207,0.2)',
         cardhover: '0 0 1px 0 rgba(189,192,207,0.06),0 10px 16px -1px rgba(189,192,207,0.4)',
       },
+      colors: {
+        'accent' : '#6449ff',
+        'darkgrey' : '#222328',
+        'grey' : '#666e75',
+        'lightgrey' : '#f9fafe'
+      }
     },
   },
   plugins: [],
