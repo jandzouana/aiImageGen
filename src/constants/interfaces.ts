@@ -11,7 +11,8 @@ export interface FormFieldProps {
     placeholder: string;
     value: string;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    isSupriseMe?: boolean;
+    isSurpriseMe?: boolean;
+    handleSurpriseMe?: any; //() => void | undefined;
 }
 
 export interface LoaderProps  {

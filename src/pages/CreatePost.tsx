@@ -22,7 +22,11 @@ const CreatePost = () => {
 
     }
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    }
+
+    const handleSurpriseMe = () => {
 
     }
 
@@ -35,7 +39,7 @@ const CreatePost = () => {
             <form onSubmit={handleSubmit} className="my-16 max-w-3xl">
                 <div className="flex flex-col gap-5">
                     <FormField labelName="Your name" type="text" name="name" placeholder="John Doe" value={form.name} handleChange={handleChange}/>
-                    <FormField labelName="Prompt" type="text" name="prompt" placeholder={getRandomPrompt()} value={form.prompt} handleChange={handleChange} isSupriseMe/>
+                    <FormField labelName="Prompt" type="text" name="prompt" placeholder={getRandomPrompt("")} value={form.prompt} handleChange={handleChange} isSurpriseMe handleSurpriseMe={handleSurpriseMe}/>
                 </div>
             </form>
         </section>
