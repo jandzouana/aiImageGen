@@ -22,7 +22,7 @@ const CreatePost = () => {
     const [generatingImg, setGeneratingImg] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e : any) => {
         e.preventDefault(); // prevent from reloading
         if(form.prompt && form.photo){
             setLoading(true);

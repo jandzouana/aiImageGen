@@ -57,7 +57,7 @@ const Home: React.FC = () => {
 
         fetchPosts();
     }, []);
-    
+
     return (
         <section className="max-w-7xl mx-auto">
             <div>
