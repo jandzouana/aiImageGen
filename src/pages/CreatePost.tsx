@@ -5,8 +5,10 @@ import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
 import { FormField, Loader } from '../components';
 import { PostForm } from "../constants/interfaces";
+import {dalleEndpoint, postEndpoint, serverUrl} from "../constants";
 
 const randomPrompt = getRandomPrompt("");
+const generateIsOn = true;
 
 const CreatePost = () => {
     const navigate = useNavigate();
@@ -20,8 +22,35 @@ const CreatePost = () => {
     const [generatingImg, setGeneratingImg] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // prevent from reloading
+        if(form.prompt && form.photo){
+            setLoading(true);
 
+            try{
+                const response = await fetch(`${serverUrl}${postEndpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(form)
+                });
+
+                await response.json();
+                console.log("Successfully created a new post!");
+                navigate('/');
+            }
+            catch (e) {
+                alert(e);
+                console.error(`Error posting image: ${e}`);
+            }
+            finally{
+                setLoading(false);
+            }
+        }
+        else{
+            alert("Please enter a prompt and generate an image")
+        }
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +62,36 @@ const CreatePost = () => {
         setForm({...form, prompt : prompt});
     }
 
-    const generateImg = () => {
+    const generateImg = async () => {
+        if(form.prompt){
+            try{
+                setGeneratingImg(true);
+                if(generateIsOn) {
+                    const url = `${serverUrl}${dalleEndpoint}`;
+                    console.log(`URL ${url}`);
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({prompt: form.prompt})
+                    })
 
+                    const data = await response.json();
+                    setForm({...form, photo: `data:image/jpeg;base64,${data.photo}`});
+                }
+            }
+            catch (e) {
+                alert(e);
+                console.error("Error generating image: " + e);
+            }
+            finally{
+                setGeneratingImg(false);
+            }
+        }
+        else{
+            alert("Please enter a prompt");
+        }
     }
 
     return (
@@ -57,7 +114,7 @@ const CreatePost = () => {
                     </div>
                 </div>
                 <div className="mt-5 flex gap-5">
-                    <button type="button" onClick={generateImg} className="text-white bg-green-600 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                    <button disabled={generatingImg} type="button" onClick={generateImg} className="text-white bg-green-600 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center">
                         {generatingImg ? 'Generating...' : 'Generate Image'}
                     </button>
                 </div>

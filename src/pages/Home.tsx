@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Loader, Card, FormField } from "./../components";
+import {postEndpoint, serverUrl} from "../constants";
 
 interface Post {
     _id: string;
@@ -27,6 +28,36 @@ const Home: React.FC = () => {
     const [searchText, setSearchText] = useState("");
     const [searchedResults, setSearchedResults] = useState<Post[]>([]);
 
+    useEffect(()=>{
+        const fetchPosts = async () => {
+            setLoading(true);
+
+            try{
+                const response = await fetch(`${serverUrl}${postEndpoint}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                if(response.ok){
+                    const result = await response.json();
+
+                    setAllPosts(result.data.reverse());
+                }
+            }
+            catch (e) {
+                alert(e);
+                console.error(`Error: ${e}`);
+            }
+            finally{
+                setLoading(false)
+            }
+        }
+
+        fetchPosts();
+    }, []);
+    
     return (
         <section className="max-w-7xl mx-auto">
             <div>
