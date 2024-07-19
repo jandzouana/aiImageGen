@@ -1,7 +1,22 @@
 import React from "react";
 
-export interface CardProps {
+export interface Post {
+    _id: string;
+    name: string;
+    prompt: string;
+    photo: string;
+}
 
+export interface RenderCardsProps {
+    data?: Post[];
+    title: string;
+}
+
+export interface CardProps {
+    _id: string;
+    name: string;
+    prompt: string;
+    photo: string;
 }
 
 export interface FormFieldProps {
