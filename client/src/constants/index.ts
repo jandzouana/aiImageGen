@@ -47,6 +47,6 @@ export const surpriseMePrompts = [
     'A Space Shuttle flying above Cape Town, digital art',
 ];
 
-export const serverUrl = 'http://localhost:8080/';
+export const serverUrl = import.meta.env.VITE_API_URL; // 'http://localhost:8080/';
 export const dalleEndpoint = 'api/v1/dalle';
 export const postEndpoint = 'api/v1/post';
