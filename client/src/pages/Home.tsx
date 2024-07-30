@@ -40,7 +40,7 @@ const Home: React.FC = () => {
             }
             catch (e) {
                 alert(e);
-                console.error(`Error: ${e}`);
+                console.error(`Error: ${e}. Please try again in 1 minute`);
             }
             finally{
                 setLoading(false)
